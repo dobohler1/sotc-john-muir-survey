@@ -12,66 +12,79 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
-  background:var(--bg);min-height:100vh;color:var(--text);line-height:1.5;
-  padding:20px 14px;}
+  background:var(--bg);min-height:100vh;color:var(--text);line-height:1.5;padding:20px 14px;}
 .wrap{max-width:640px;margin:0 auto;}
-.hero{background:var(--navy);color:#fff;border-radius:12px;padding:28px 24px;margin-bottom:16px;text-align:center;}
+.hero{background:var(--navy);color:#fff;border-radius:12px;padding:26px 24px;margin-bottom:14px;text-align:center;}
 .hero .kicker{font-size:12px;letter-spacing:2px;color:var(--red);text-transform:uppercase;font-weight:700;margin-bottom:6px;}
-.hero h1{font-size:26px;line-height:1.25;margin-bottom:10px;font-weight:800;}
+.hero h1{font-size:25px;line-height:1.25;margin-bottom:8px;font-weight:800;}
 .hero p{font-size:15px;color:#b0bdd0;}
+/* progress */
+.progress{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:0 4px;}
+.progress .bar{flex:1;height:8px;background:#e2e6ec;border-radius:99px;overflow:hidden;}
+.progress .bar span{display:block;height:100%;background:var(--red);width:0;transition:width .25s;}
+.progress .txt{font-size:12px;color:var(--muted);font-weight:700;white-space:nowrap;}
 .card{background:var(--card);border-radius:12px;padding:22px 22px;margin-bottom:14px;border:1px solid var(--border);}
-.card h2{font-size:17px;color:var(--navy);margin-bottom:6px;border-bottom:2px solid #e2e6ec;padding-bottom:8px;}
+.card h2{font-size:18px;color:var(--navy);margin-bottom:6px;border-bottom:2px solid #e2e6ec;padding-bottom:8px;}
 .card .helper{font-size:13px;color:var(--muted);margin-bottom:14px;}
 .q{margin-bottom:18px;}
 .q:last-child{margin-bottom:0;}
 .q > label, .q .qlabel{display:block;font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text);}
 .q .sub{font-size:13px;color:var(--muted);font-weight:400;display:block;margin-top:2px;}
 .q input[type=text], .q textarea, .q select{width:100%;padding:11px 13px;font-size:15px;
-  border:1px solid #d0d6e0;border-radius:8px;background:#fafbfc;font-family:inherit;
-  -webkit-appearance:none;appearance:none;}
+  border:1px solid #d0d6e0;border-radius:8px;background:#fafbfc;font-family:inherit;-webkit-appearance:none;appearance:none;}
 .q textarea{resize:vertical;min-height:64px;}
 .q input:focus, .q textarea:focus, .q select:focus{outline:none;border-color:var(--red);background:#fff;}
-/* Compact segmented Likert scale */
 .scale{display:grid;gap:6px;}
 .scale.n2{grid-template-columns:repeat(2,1fr);}
 .scale.n3{grid-template-columns:repeat(3,1fr);}
 .scale.n4{grid-template-columns:repeat(4,1fr);}
 .scale label{display:flex;align-items:center;justify-content:center;text-align:center;
-  padding:11px 6px;background:#fafbfc;border:1px solid #d0d6e0;border-radius:9px;
-  cursor:pointer;font-size:13px;font-weight:600;line-height:1.25;min-height:48px;
-  transition:all .12s;-webkit-tap-highlight-color:transparent;}
+  padding:11px 6px;background:#fafbfc;border:1px solid #d0d6e0;border-radius:9px;cursor:pointer;
+  font-size:13px;font-weight:600;line-height:1.25;min-height:48px;transition:all .12s;-webkit-tap-highlight-color:transparent;}
 .scale input{display:none;}
 .scale label:has(input:checked){background:var(--navy);border-color:var(--navy);color:#fff;}
-/* Matrix sub-rows share one scale */
 .matrix-row{margin-bottom:12px;}
 .matrix-row:last-child{margin-bottom:0;}
 .matrix-row .rowlabel{font-size:14px;font-weight:600;margin-bottom:7px;display:block;}
-.submit{width:100%;background:var(--red);color:#fff;border:none;border-radius:10px;
-  padding:16px;font-size:17px;font-weight:700;cursor:pointer;margin-top:4px;
-  -webkit-tap-highlight-color:transparent;}
-.submit:active{opacity:.85;}
-.submit:disabled{opacity:.5;cursor:not-allowed;}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.choices label{display:block;padding:12px 12px;background:#fafbfc;border:1px solid #d0d6e0;border-radius:9px;
+  cursor:pointer;font-size:14px;font-weight:500;transition:all .12s;-webkit-tap-highlight-color:transparent;}
+.choices input{display:none;}
+.choices label:has(input:checked){background:var(--navy);border-color:var(--navy);color:#fff;}
+.phase{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.phase label{display:flex;align-items:center;justify-content:center;padding:14px;background:#fafbfc;
+  border:1px solid #d0d6e0;border-radius:10px;cursor:pointer;font-size:15px;font-weight:700;transition:all .12s;}
+.phase input{display:none;}
+.phase label:has(input:checked){background:var(--red);border-color:var(--red);color:#fff;}
+/* nav */
+.nav{display:flex;gap:10px;margin-top:4px;}
+.btn{flex:1;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.btn.next{background:var(--red);color:#fff;}
+.btn.back{background:#e9edf2;color:var(--navy);max-width:120px;flex:0 0 auto;}
+.btn:active{opacity:.85;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
 #status{text-align:center;margin-top:12px;font-size:14px;min-height:20px;}
 #status.err{color:var(--err);}
-#status.ok{color:var(--green);}
+.page{display:none;}
+.page.active{display:block;}
 .thanks{display:none;text-align:center;padding:40px 24px;}
 .thanks.show{display:block;}
 .thanks h2{color:var(--navy);font-size:24px;margin-bottom:10px;border:none;padding:0;}
 .thanks p{color:var(--muted);font-size:15px;margin-bottom:8px;}
 .footer{text-align:center;color:var(--muted);font-size:12px;padding:14px 0 24px;}
 .required{color:var(--err);font-weight:700;}
-/* Unanswered-question highlight */
-.q.missing{scroll-margin-top:80px;}
-.q.missing .qlabel, .q.missing .rowlabel{color:var(--err);}
-.q.missing .scale label{border-color:var(--err);background:#fdecec;}
-.q.missing select{border-color:var(--err);background:#fdecec;}
 .demo{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+/* unanswered highlight */
+.q.missing{scroll-margin-top:80px;}
+.q.missing .qlabel, .q.missing .rowlabel, .q.missing > label{color:var(--err);}
+.q.missing .scale label, .q.missing .choices label, .q.missing .phase label{border-color:var(--err);background:#fdecec;}
+.q.missing select, .q.missing input[type=text]{border-color:var(--err);background:#fdecec;}
 @media (max-width:480px){
-  .hero{padding:22px 18px;}
-  .hero h1{font-size:22px;}
+  .hero h1{font-size:21px;}
   .card{padding:18px 16px;}
   .scale.n4{grid-template-columns:repeat(2,1fr);}
   .demo{grid-template-columns:1fr;}
+  .choices{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -80,239 +93,312 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 
 <div class="hero">
   <p class="kicker">John Muir · Science on the Court</p>
-  <h1>How Did We Do?</h1>
-  <p>A few minutes. Be honest — this helps us make the program better.</p>
+  <h1>Program Survey</h1>
+  <p>Be honest — this helps us make the program better.</p>
+</div>
+
+<div class="progress" id="progress">
+  <div class="bar"><span id="bar-fill"></span></div>
+  <div class="txt" id="progress-txt">Page 1</div>
 </div>
 
 <form id="survey-form">
 
-  <!-- Demographics -->
-  <div class="card">
-    <h2>About You</h2>
-    <div class="demo">
-      <div class="q" data-required style="margin-bottom:0;">
-        <label class="qlabel">Grade <span class="required">*</span></label>
-        <select name="grade">
-          <option value="">Choose…</option>
-          <option>6th</option>
-          <option>7th</option>
-          <option>8th</option>
-        </select>
+  <!-- PAGE 1 — Always shown -->
+  <section class="page active" data-page>
+    <div class="card">
+      <h2>About You</h2>
+
+      <div class="q" data-required>
+        <span class="qlabel">When are you taking this? <span class="required">*</span></span>
+        <span class="sub">Your coach will tell you which one.</span>
+        <div class="phase" style="margin-top:8px;">
+          <label><input type="radio" name="phase" value="Start">Start of program</label>
+          <label><input type="radio" name="phase" value="End">End of program</label>
+        </div>
       </div>
-      <div class="q" data-required style="margin-bottom:0;">
-        <label class="qlabel">Gender <span class="required">*</span></label>
-        <select name="gender">
-          <option value="">Choose…</option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Prefer not to say</option>
-        </select>
+
+      <div class="q" data-required>
+        <label class="qlabel">Your name <span class="required">*</span></label>
+        <span class="sub">First and last name, so we can match your start and end answers. This stays private.</span>
+        <input type="text" name="student_name" placeholder="First and last name">
+      </div>
+
+      <div class="demo">
+        <div class="q" data-required style="margin-bottom:0;">
+          <label class="qlabel">Grade <span class="required">*</span></label>
+          <select name="grade">
+            <option value="">Choose…</option>
+            <option>6th</option><option>7th</option><option>8th</option>
+          </select>
+        </div>
+        <div class="q" data-required style="margin-bottom:0;">
+          <label class="qlabel">Gender <span class="required">*</span></label>
+          <select name="gender">
+            <option value="">Choose…</option>
+            <option>Male</option><option>Female</option><option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="q" data-required style="margin-top:18px;">
+        <label class="qlabel">Race / Ethnicity <span class="required">*</span></label>
+        <span class="sub">Check all that apply.</span>
+        <div class="choices" style="margin-top:8px;">
+          <label><input type="checkbox" name="race" value="Black or African American">Black or African American</label>
+          <label><input type="checkbox" name="race" value="Hispanic or Latino">Hispanic or Latino</label>
+          <label><input type="checkbox" name="race" value="Asian">Asian</label>
+          <label><input type="checkbox" name="race" value="White">White</label>
+          <label><input type="checkbox" name="race" value="Native Hawaiian or Other Pacific Islander">Native Hawaiian / Pacific Islander</label>
+          <label><input type="checkbox" name="race" value="American Indian or Alaska Native">American Indian / Alaska Native</label>
+          <label><input type="checkbox" name="race" value="Two or More Races">Two or More Races</label>
+          <label><input type="checkbox" name="race" value="Prefer not to say">Prefer not to say</label>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- PAGE 2 — Always shown (pre AND post) -->
+  <section class="page" data-page>
+    <div class="card">
+      <h2>Your Future</h2>
+      <p class="helper">There are no wrong answers.</p>
+
+      <div class="q" data-required>
+        <span class="qlabel">Are you considering a future or career in STEM (science, technology, engineering, or math)? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="considering_stem" value="Yes">Yes</label>
+          <label><input type="radio" name="considering_stem" value="Maybe">Maybe</label>
+          <label><input type="radio" name="considering_stem" value="No">No</label>
+        </div>
+      </div>
+
+      <div class="q" data-required>
+        <span class="qlabel">Are you considering a future or career in sports? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="considering_sports" value="Yes">Yes</label>
+          <label><input type="radio" name="considering_sports" value="Maybe">Maybe</label>
+          <label><input type="radio" name="considering_sports" value="No">No</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== END-OF-PROGRAM ONLY PAGES ===== -->
+
+  <!-- PAGE 3 -->
+  <section class="page" data-page data-end-only>
+    <div class="card">
+      <h2>Your Experience</h2>
+
+      <div class="q" data-required>
+        <span class="qlabel">How enjoyable was the Science on the Court program? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="enjoyable" value="Very enjoyable">Very enjoyable</label>
+          <label><input type="radio" name="enjoyable" value="Somewhat enjoyable">Somewhat enjoyable</label>
+          <label><input type="radio" name="enjoyable" value="Not enjoyable">Not enjoyable</label>
+        </div>
+      </div>
+
+      <div class="q" data-required>
+        <span class="qlabel">How effective was the balance between classroom learning and basketball activities? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="balance" value="Very effective">Very effective</label>
+          <label><input type="radio" name="balance" value="Somewhat effective">Somewhat effective</label>
+          <label><input type="radio" name="balance" value="Not effective">Not effective</label>
+        </div>
+      </div>
+
+      <div class="q" data-required>
+        <span class="qlabel">How helpful were the hands-on experiments and basketball drills in helping you improve in basketball or STEM? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="handson" value="Very effective">Very helpful</label>
+          <label><input type="radio" name="handson" value="Somewhat effective">Somewhat helpful</label>
+          <label><input type="radio" name="handson" value="Not effective">Not helpful</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="page" data-page data-end-only>
+    <div class="card">
+      <h2>What You Learned</h2>
+      <p class="helper">After this program, how much better do you understand the following?</p>
+
+      <div class="q matrix-row" data-required>
+        <span class="rowlabel">Robotics (building and programming) <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="understand_robotics" value="Much better">Much better</label>
+          <label><input type="radio" name="understand_robotics" value="Somewhat better">Somewhat better</label>
+          <label><input type="radio" name="understand_robotics" value="About the same">About the same</label>
+        </div>
+      </div>
+      <div class="q matrix-row" data-required>
+        <span class="rowlabel">Math concepts (measurement, data, ratios, equations) <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="understand_math" value="Much better">Much better</label>
+          <label><input type="radio" name="understand_math" value="Somewhat better">Somewhat better</label>
+          <label><input type="radio" name="understand_math" value="About the same">About the same</label>
+        </div>
+      </div>
+      <div class="q matrix-row" data-required>
+        <span class="rowlabel">Physics concepts (motion, speed, energy) <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="understand_physics" value="Much better">Much better</label>
+          <label><input type="radio" name="understand_physics" value="Somewhat better">Somewhat better</label>
+          <label><input type="radio" name="understand_physics" value="About the same">About the same</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="page" data-page data-end-only>
+    <div class="card">
+      <h2>During the Program</h2>
+
+      <div class="q" data-required>
+        <span class="qlabel">I used math or science to solve real problems during the program. <span class="required">*</span></span>
+        <div class="scale n4">
+          <label><input type="radio" name="used_real_problems" value="Always">Always</label>
+          <label><input type="radio" name="used_real_problems" value="Often">Often</label>
+          <label><input type="radio" name="used_real_problems" value="Sometimes">Sometimes</label>
+          <label><input type="radio" name="used_real_problems" value="Never">Never</label>
+        </div>
+      </div>
+
+      <p class="helper" style="margin:6px 0 12px;">How often did you do the following during the program?</p>
+
+      <div class="q matrix-row" data-required>
+        <span class="rowlabel">Tried again after making a mistake <span class="required">*</span></span>
+        <div class="scale n4">
+          <label><input type="radio" name="freq_tried_again" value="Always">Always</label>
+          <label><input type="radio" name="freq_tried_again" value="Often">Often</label>
+          <label><input type="radio" name="freq_tried_again" value="Sometimes">Sometimes</label>
+          <label><input type="radio" name="freq_tried_again" value="Never">Never</label>
+        </div>
+      </div>
+      <div class="q matrix-row" data-required>
+        <span class="rowlabel">Used math to work something out <span class="required">*</span></span>
+        <div class="scale n4">
+          <label><input type="radio" name="freq_math" value="Always">Always</label>
+          <label><input type="radio" name="freq_math" value="Often">Often</label>
+          <label><input type="radio" name="freq_math" value="Sometimes">Sometimes</label>
+          <label><input type="radio" name="freq_math" value="Never">Never</label>
+        </div>
+      </div>
+      <div class="q matrix-row" data-required>
+        <span class="rowlabel">Explained your thinking or solution to others <span class="required">*</span></span>
+        <div class="scale n4">
+          <label><input type="radio" name="freq_explained" value="Always">Always</label>
+          <label><input type="radio" name="freq_explained" value="Often">Often</label>
+          <label><input type="radio" name="freq_explained" value="Sometimes">Sometimes</label>
+          <label><input type="radio" name="freq_explained" value="Never">Never</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 6 -->
+  <section class="page" data-page data-end-only>
+    <div class="card">
+      <h2>You and STEM</h2>
+
+      <div class="q" data-required>
+        <span class="qlabel">Do you think there are scientists, engineers, or inventors who come from the same kind of background as you? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="scientists_background" value="Yes">Yes</label>
+          <label><input type="radio" name="scientists_background" value="Not sure">Not sure</label>
+          <label><input type="radio" name="scientists_background" value="No">No</label>
+        </div>
+      </div>
+
+      <div class="q" data-required>
+        <span class="qlabel">Does seeing people like you in STEM make you more interested in it? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="seeing_people" value="Yes">Yes</label>
+          <label><input type="radio" name="seeing_people" value="Maybe">Maybe</label>
+          <label><input type="radio" name="seeing_people" value="No">No</label>
+        </div>
+      </div>
+
+      <div class="q" data-required>
+        <span class="qlabel">How has your interest in STEM fields and basketball changed because of this program? <span class="required">*</span></span>
+        <div class="scale n4">
+          <label><input type="radio" name="interest_changed" value="Significantly increased">Significantly increased</label>
+          <label><input type="radio" name="interest_changed" value="Somewhat increased">Somewhat increased</label>
+          <label><input type="radio" name="interest_changed" value="No change">No change</label>
+          <label><input type="radio" name="interest_changed" value="Decreased">Decreased</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 7 -->
+  <section class="page" data-page data-end-only>
+    <div class="card">
+      <h2>Instructors &amp; Final Project</h2>
+
+      <div class="q" data-required>
+        <span class="qlabel">Overall, how effective were the instructors in enhancing your learning experience? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="instructors" value="Very effective">Very effective</label>
+          <label><input type="radio" name="instructors" value="Somewhat effective">Somewhat effective</label>
+          <label><input type="radio" name="instructors" value="Not effective">Not effective</label>
+        </div>
+      </div>
+
+      <div class="q" data-required>
+        <span class="qlabel">Did you feel prepared to explain the final robot project to others? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="prepared_robot" value="Very prepared">Very prepared</label>
+          <label><input type="radio" name="prepared_robot" value="Somewhat prepared">Somewhat prepared</label>
+          <label><input type="radio" name="prepared_robot" value="Not prepared">Not prepared</label>
+        </div>
+      </div>
+
+      <div class="q" data-required>
+        <span class="qlabel">Would you recommend this program to a friend? <span class="required">*</span></span>
+        <div class="scale n3">
+          <label><input type="radio" name="recommend" value="Yes">Yes</label>
+          <label><input type="radio" name="recommend" value="Maybe">Maybe</label>
+          <label><input type="radio" name="recommend" value="No">No</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 8 -->
+  <section class="page" data-page data-end-only>
+    <div class="card">
+      <h2>In Your Own Words</h2>
+      <p class="helper">Optional, but we read every one.</p>
+      <div class="q">
+        <label>What was your favorite activity and why?</label>
+        <textarea name="favorite" rows="2"></textarea>
+      </div>
+      <div class="q">
+        <label>What would you change about the program to make it more enjoyable AND improve how much students learn?</label>
+        <textarea name="change" rows="2"></textarea>
+      </div>
+      <div class="q">
+        <label>Any final comments for the instructors or program sponsors?</label>
+        <textarea name="final_comments" rows="2"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <div class="nav">
+    <button type="button" class="btn back" id="back-btn" style="display:none;">← Back</button>
+    <button type="button" class="btn next" id="next-btn">Next →</button>
   </div>
-
-  <!-- Overall experience -->
-  <div class="card">
-    <h2>Your Experience</h2>
-
-    <div class="q" data-required>
-      <span class="qlabel">How enjoyable was the Science on the Court program? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="enjoyable" value="Very enjoyable">Very enjoyable</label>
-        <label><input type="radio" name="enjoyable" value="Somewhat enjoyable">Somewhat enjoyable</label>
-        <label><input type="radio" name="enjoyable" value="Not enjoyable">Not enjoyable</label>
-      </div>
-    </div>
-
-    <div class="q" data-required>
-      <span class="qlabel">How effective was the balance between classroom learning and basketball activities? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="balance" value="Very effective">Very effective</label>
-        <label><input type="radio" name="balance" value="Somewhat effective">Somewhat effective</label>
-        <label><input type="radio" name="balance" value="Not effective">Not effective</label>
-      </div>
-    </div>
-
-    <div class="q" data-required>
-      <span class="qlabel">How helpful were the hands-on experiments and basketball drills in helping you improve in basketball or STEM? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="handson" value="Very effective">Very helpful</label>
-        <label><input type="radio" name="handson" value="Somewhat effective">Somewhat helpful</label>
-        <label><input type="radio" name="handson" value="Not effective">Not helpful</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Understanding gains -->
-  <div class="card">
-    <h2>What You Learned</h2>
-    <p class="helper">After this program, how much better do you understand the following?</p>
-
-    <div class="q matrix-row" data-required>
-      <span class="rowlabel">Robotics (building and programming) <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="understand_robotics" value="Much better">Much better</label>
-        <label><input type="radio" name="understand_robotics" value="Somewhat better">Somewhat better</label>
-        <label><input type="radio" name="understand_robotics" value="About the same">About the same</label>
-      </div>
-    </div>
-
-    <div class="q matrix-row" data-required>
-      <span class="rowlabel">Math concepts (measurement, data, ratios, equations) <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="understand_math" value="Much better">Much better</label>
-        <label><input type="radio" name="understand_math" value="Somewhat better">Somewhat better</label>
-        <label><input type="radio" name="understand_math" value="About the same">About the same</label>
-      </div>
-    </div>
-
-    <div class="q matrix-row" data-required>
-      <span class="rowlabel">Physics concepts (motion, speed, energy) <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="understand_physics" value="Much better">Much better</label>
-        <label><input type="radio" name="understand_physics" value="Somewhat better">Somewhat better</label>
-        <label><input type="radio" name="understand_physics" value="About the same">About the same</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Behaviors / habits -->
-  <div class="card">
-    <h2>During the Program</h2>
-
-    <div class="q" data-required>
-      <span class="qlabel">I used math or science to solve real problems during the program. <span class="required">*</span></span>
-      <div class="scale n4">
-        <label><input type="radio" name="used_real_problems" value="Always">Always</label>
-        <label><input type="radio" name="used_real_problems" value="Often">Often</label>
-        <label><input type="radio" name="used_real_problems" value="Sometimes">Sometimes</label>
-        <label><input type="radio" name="used_real_problems" value="Never">Never</label>
-      </div>
-    </div>
-
-    <p class="helper" style="margin:6px 0 12px;">How often did you do the following during the program?</p>
-
-    <div class="q matrix-row" data-required>
-      <span class="rowlabel">Tried again after making a mistake <span class="required">*</span></span>
-      <div class="scale n4">
-        <label><input type="radio" name="freq_tried_again" value="Always">Always</label>
-        <label><input type="radio" name="freq_tried_again" value="Often">Often</label>
-        <label><input type="radio" name="freq_tried_again" value="Sometimes">Sometimes</label>
-        <label><input type="radio" name="freq_tried_again" value="Never">Never</label>
-      </div>
-    </div>
-
-    <div class="q matrix-row" data-required>
-      <span class="rowlabel">Used math to work something out <span class="required">*</span></span>
-      <div class="scale n4">
-        <label><input type="radio" name="freq_math" value="Always">Always</label>
-        <label><input type="radio" name="freq_math" value="Often">Often</label>
-        <label><input type="radio" name="freq_math" value="Sometimes">Sometimes</label>
-        <label><input type="radio" name="freq_math" value="Never">Never</label>
-      </div>
-    </div>
-
-    <div class="q matrix-row" data-required>
-      <span class="rowlabel">Explained your thinking or solution to others <span class="required">*</span></span>
-      <div class="scale n4">
-        <label><input type="radio" name="freq_explained" value="Always">Always</label>
-        <label><input type="radio" name="freq_explained" value="Often">Often</label>
-        <label><input type="radio" name="freq_explained" value="Sometimes">Sometimes</label>
-        <label><input type="radio" name="freq_explained" value="Never">Never</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- STEM identity -->
-  <div class="card">
-    <h2>You and STEM</h2>
-
-    <div class="q" data-required>
-      <span class="qlabel">Do you think there are scientists, engineers, or inventors who come from the same kind of background as you? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="scientists_background" value="Yes">Yes</label>
-        <label><input type="radio" name="scientists_background" value="Not sure">Not sure</label>
-        <label><input type="radio" name="scientists_background" value="No">No</label>
-      </div>
-    </div>
-
-    <div class="q" data-required>
-      <span class="qlabel">Does seeing people like you in STEM make you more interested in it? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="seeing_people" value="Yes">Yes</label>
-        <label><input type="radio" name="seeing_people" value="Maybe">Maybe</label>
-        <label><input type="radio" name="seeing_people" value="No">No</label>
-      </div>
-    </div>
-
-    <div class="q" data-required>
-      <span class="qlabel">How has your interest in STEM fields and basketball changed because of this program? <span class="required">*</span></span>
-      <div class="scale n4">
-        <label><input type="radio" name="interest_changed" value="Significantly increased">Significantly increased</label>
-        <label><input type="radio" name="interest_changed" value="Somewhat increased">Somewhat increased</label>
-        <label><input type="radio" name="interest_changed" value="No change">No change</label>
-        <label><input type="radio" name="interest_changed" value="Decreased">Decreased</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Instructors / outcome -->
-  <div class="card">
-    <h2>Instructors &amp; Final Project</h2>
-
-    <div class="q" data-required>
-      <span class="qlabel">Overall, how effective were the instructors in enhancing your learning experience? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="instructors" value="Very effective">Very effective</label>
-        <label><input type="radio" name="instructors" value="Somewhat effective">Somewhat effective</label>
-        <label><input type="radio" name="instructors" value="Not effective">Not effective</label>
-      </div>
-    </div>
-
-    <div class="q" data-required>
-      <span class="qlabel">Did you feel prepared to explain the final robot project to others? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="prepared_robot" value="Very prepared">Very prepared</label>
-        <label><input type="radio" name="prepared_robot" value="Somewhat prepared">Somewhat prepared</label>
-        <label><input type="radio" name="prepared_robot" value="Not prepared">Not prepared</label>
-      </div>
-    </div>
-
-    <div class="q" data-required>
-      <span class="qlabel">Would you recommend this program to a friend? <span class="required">*</span></span>
-      <div class="scale n3">
-        <label><input type="radio" name="recommend" value="Yes">Yes</label>
-        <label><input type="radio" name="recommend" value="Maybe">Maybe</label>
-        <label><input type="radio" name="recommend" value="No">No</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Open-ended -->
-  <div class="card">
-    <h2>In Your Own Words</h2>
-    <p class="helper">Optional, but we read every one.</p>
-    <div class="q">
-      <label>What was your favorite activity and why?</label>
-      <textarea name="favorite" rows="2"></textarea>
-    </div>
-    <div class="q">
-      <label>What would you change about the program to make it more enjoyable AND improve how much students learn?</label>
-      <textarea name="change" rows="2"></textarea>
-    </div>
-    <div class="q">
-      <label>Any final comments for the instructors or program sponsors?</label>
-      <textarea name="final_comments" rows="2"></textarea>
-    </div>
-  </div>
-
-  <button class="submit" type="submit" id="submit-btn">Submit My Survey</button>
   <p id="status"></p>
 </form>
 
 <div class="thanks card" id="thanks">
   <h2>Thank you! 🏀</h2>
-  <p>Your answers are in. This is how we make next year even better.</p>
+  <p>Your answers are in. This is how we make the program even better.</p>
   <p style="margin-top:12px;">— Coach Dorian &amp; the Science on the Court team</p>
 </div>
 
@@ -323,126 +409,143 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 const REPORT_EMAIL = "dbohler@scienceonthecourt.com";
-const FORM_VERSION = "v1";
+const FORM_VERSION = "v2";
 const PROGRAM = "John Muir";
-
-// Google Sheet backend (Apps Script web app URL).
-// Deploy backend/end_of_program_webhook.gs, then paste the /exec URL here.
 const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwa8cXx8mdIVZ-Ml_5pUL32Q6x2a1UWulzZMkxAWMtbfJiwTJipUxQVN-8GG28J9gEyMw/exec";
-
-// Reuses the existing SOTC EmailJS notification template.
-const EMAILJS_CONFIG = {
-  publicKey:  "ipaVLQ_Dm6mxja_XA",
-  serviceId:  "service_q1l18a2",
-  templateId: "template_439vcb9"
-};
+const EMAILJS_CONFIG = { publicKey:"ipaVLQ_Dm6mxja_XA", serviceId:"service_q1l18a2", templateId:"template_439vcb9" };
 emailjs.init(EMAILJS_CONFIG.publicKey);
 
-// Field name -> human label, in 2025 column order (keep in sync with the .gs).
+// All payload fields in the spreadsheet's column order (keep in sync with the .gs).
 const FIELDS = [
-  ["grade", "Grade"],
-  ["gender", "Gender"],
-  ["enjoyable", "How enjoyable was the program?"],
-  ["balance", "Effectiveness of classroom/basketball balance"],
-  ["handson", "Helpfulness of hands-on experiments & drills"],
-  ["understand_robotics", "Understand better: Robotics"],
-  ["understand_math", "Understand better: Math concepts"],
-  ["understand_physics", "Understand better: Physics concepts"],
-  ["used_real_problems", "Used math/science to solve real problems"],
-  ["freq_tried_again", "How often: Tried again after a mistake"],
-  ["freq_math", "How often: Used math"],
-  ["freq_explained", "How often: Explained thinking to others"],
-  ["scientists_background", "Scientists/engineers from my background exist?"],
-  ["seeing_people", "Seeing people like me makes me more interested?"],
-  ["interest_changed", "Interest in STEM & basketball changed"],
-  ["instructors", "Instructor effectiveness"],
-  ["prepared_robot", "Prepared to explain final robot project?"],
-  ["recommend", "Would recommend to a friend?"],
-  ["favorite", "Favorite activity"],
-  ["change", "What would you change"],
-  ["final_comments", "Final comments"],
+  ["phase","When taken (Start/End)"], ["student_name","Student name"], ["grade","Grade"], ["gender","Gender"],
+  ["race","Race/Ethnicity"], ["considering_stem","Considering STEM"], ["considering_sports","Considering sports"],
+  ["enjoyable","How enjoyable was the program?"], ["balance","Classroom/basketball balance"],
+  ["handson","Hands-on experiments & drills helpful"], ["understand_robotics","Understand better: Robotics"],
+  ["understand_math","Understand better: Math"], ["understand_physics","Understand better: Physics"],
+  ["used_real_problems","Used math/science on real problems"], ["freq_tried_again","How often: Tried again"],
+  ["freq_math","How often: Used math"], ["freq_explained","How often: Explained thinking"],
+  ["scientists_background","Scientists from my background exist?"], ["seeing_people","Seeing people like me → more interested"],
+  ["interest_changed","Interest in STEM & basketball changed"], ["instructors","Instructor effectiveness"],
+  ["prepared_robot","Prepared to explain final robot?"], ["recommend","Would recommend to a friend?"],
+  ["favorite","Favorite activity"], ["change","What would you change"], ["final_comments","Final comments"],
 ];
 
 const form = document.getElementById("survey-form");
-const btn = document.getElementById("submit-btn");
+const nextBtn = document.getElementById("next-btn");
+const backBtn = document.getElementById("back-btn");
 const status = document.getElementById("status");
 const thanks = document.getElementById("thanks");
+const barFill = document.getElementById("bar-fill");
+const progressTxt = document.getElementById("progress-txt");
+const allPages = [...document.querySelectorAll('.page')];
+let current = allPages[0];
 
-// Clear the red highlight as soon as a question gets answered.
-form.addEventListener("change", (e) => {
+function phase(){ const r = form.querySelector('input[name="phase"]:checked'); return r ? r.value : ""; }
+// Pages that apply given the chosen phase (end-only pages drop out for "Start").
+function activePages(){
+  return allPages.filter(p => p.dataset.endOnly === undefined || phase() === "End");
+}
+
+function render(){
+  allPages.forEach(p => p.classList.remove("active"));
+  current.classList.add("active");
+  const pages = activePages();
+  const idx = pages.indexOf(current);
+  const isLast = idx === pages.length - 1;
+  backBtn.style.display = idx > 0 ? "block" : "none";
+  nextBtn.textContent = isLast ? "Submit ✓" : "Next →";
+  barFill.style.width = Math.round(((idx + 1) / pages.length) * 100) + "%";
+  progressTxt.textContent = `Page ${idx + 1} of ${pages.length}`;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// Validate the visible page; highlight anything unanswered.
+function validate(pageEl){
+  const missing = [];
+  pageEl.querySelectorAll('.q[data-required]').forEach(q => {
+    q.classList.remove("missing");
+    const radios = q.querySelectorAll('input[type=radio]');
+    const checks = q.querySelectorAll('input[type=checkbox]');
+    const sel = q.querySelector('select');
+    const txt = q.querySelector('input[type=text]');
+    let ok = true;
+    if (radios.length)      ok = !!form.querySelector(`input[name="${radios[0].name}"]:checked`);
+    else if (checks.length) ok = [...checks].some(c => c.checked);
+    else if (sel)           ok = !!sel.value;
+    else if (txt)           ok = !!txt.value.trim();
+    if (!ok){ q.classList.add("missing"); missing.push(q); }
+  });
+  if (missing.length){
+    status.className = "err";
+    status.textContent = `Please answer the ${missing.length} question${missing.length>1?"s":""} highlighted in red.`;
+    missing[0].scrollIntoView({ behavior:"smooth", block:"center" });
+  } else {
+    status.className = ""; status.textContent = "";
+  }
+  return missing.length === 0;
+}
+
+// Clear a highlight as soon as the question is answered.
+form.addEventListener("change", e => {
   const q = e.target.closest && e.target.closest('.q.missing');
   if (q) q.classList.remove("missing");
 });
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  status.className = "";
+backBtn.addEventListener("click", () => {
+  const pages = activePages();
+  const idx = pages.indexOf(current);
+  if (idx > 0){ current = pages[idx - 1]; render(); }
+});
 
-  // Validate every required question (radio groups + the demographic selects).
-  const missing = [];
-  document.querySelectorAll('.q[data-required]').forEach((q) => {
-    q.classList.remove("missing");
-    const radios = q.querySelectorAll('input[type=radio]');
-    const sel = q.querySelector('select');
-    let answered = true;
-    if (radios.length) answered = !!form.querySelector(`input[name="${radios[0].name}"]:checked`);
-    else if (sel) answered = !!sel.value;
-    if (!answered) { q.classList.add("missing"); missing.push(q); }
-  });
-  if (missing.length) {
-    status.className = "err";
-    status.textContent = `Please answer the ${missing.length} question${missing.length>1?"s":""} highlighted in red, then tap Submit again.`;
-    missing[0].scrollIntoView({ behavior: "smooth", block: "center" });
-    return;
-  }
+nextBtn.addEventListener("click", async () => {
+  if (!validate(current)) return;
+  const pages = activePages();
+  const idx = pages.indexOf(current);
+  if (idx < pages.length - 1){ current = pages[idx + 1]; render(); return; }
+  await submit();
+});
 
-  btn.disabled = true;
-  status.textContent = "Sending…";
+async function submit(){
+  nextBtn.disabled = true; backBtn.disabled = true;
+  status.className = ""; status.textContent = "Sending…";
 
   const data = new FormData(form);
-  const get = (k) => (data.get(k) || "").toString().trim();
+  const get = k => (data.get(k) || "").toString().trim();
+  const race = data.getAll("race").join(", ");
 
-  // Structured payload for the Google Sheet (keys map 1:1 to the .gs append order).
   const sheetPayload = { program: PROGRAM, form_version: FORM_VERSION, source_url: window.location.href };
-  FIELDS.forEach(([k]) => { sheetPayload[k] = get(k); });
+  FIELDS.forEach(([k]) => { sheetPayload[k] = k === "race" ? race : get(k); });
 
-  // Readable summary for the email notification.
-  const body = FIELDS.map(([k, label]) => `${label}: ${get(k) || "—"}`).join("\n");
+  const body = FIELDS.map(([k, label]) => `${label}: ${sheetPayload[k] || "—"}`).join("\n");
   const params = {
-    to_email: REPORT_EMAIL,
-    student: `${get("grade")} ${get("gender")}`.trim() || "Student",
-    date: new Date().toISOString().slice(0, 10),
-    session_num: "End-of-Program Survey",
-    score: get("recommend") ? `Recommend: ${get("recommend")}` : "",
-    pct: "",
-    breakdown: body,
-    weakest: "",
-    running_stats: "",
-    next_focus: get("change").slice(0, 160),
+    to_email: REPORT_EMAIL, student: get("student_name") || "Student",
+    date: new Date().toISOString().slice(0,10), session_num: `Survey (${get("phase")})`,
+    score: `STEM ${get("considering_stem")||"—"} / Sports ${get("considering_sports")||"—"}`,
+    pct:"", breakdown: body, weakest:"", running_stats:"", next_focus: get("change").slice(0,160),
   };
 
   const emailPromise = emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, params)
-    .catch((err) => console.warn("Email notify failed (non-fatal):", err));
+    .catch(err => console.warn("Email notify failed (non-fatal):", err));
   const sheetPromise = SHEETS_WEBHOOK_URL.startsWith("http")
-    ? fetch(SHEETS_WEBHOOK_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(sheetPayload),
-      }).catch((err) => console.warn("Sheet write failed (non-fatal):", err))
+    ? fetch(SHEETS_WEBHOOK_URL, { method:"POST", mode:"no-cors",
+        headers:{ "Content-Type":"text/plain;charset=utf-8" }, body: JSON.stringify(sheetPayload) })
+        .catch(err => console.warn("Sheet write failed (non-fatal):", err))
     : Promise.resolve();
 
   try {
     await Promise.all([emailPromise, sheetPromise]);
     form.style.display = "none";
+    document.getElementById("progress").style.display = "none";
     thanks.classList.add("show");
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (err) {
     status.className = "err";
     status.textContent = "Couldn't send — please tell your coach. (" + (err.text || err.message || "error") + ")";
-    btn.disabled = false;
+    nextBtn.disabled = false; backBtn.disabled = false;
   }
-});
+}
+
+render();
 </script>
 </body>
 </html>
