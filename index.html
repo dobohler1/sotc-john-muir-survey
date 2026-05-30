@@ -60,6 +60,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .thanks p{color:var(--muted);font-size:15px;margin-bottom:8px;}
 .footer{text-align:center;color:var(--muted);font-size:12px;padding:14px 0 24px;}
 .required{color:var(--err);font-weight:700;}
+/* Unanswered-question highlight */
+.q.missing{scroll-margin-top:80px;}
+.q.missing .qlabel, .q.missing .rowlabel{color:var(--err);}
+.q.missing .scale label{border-color:var(--err);background:#fdecec;}
+.q.missing select{border-color:var(--err);background:#fdecec;}
 .demo{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media (max-width:480px){
   .hero{padding:22px 18px;}
@@ -85,18 +90,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
   <div class="card">
     <h2>About You</h2>
     <div class="demo">
-      <div class="q" style="margin-bottom:0;">
-        <label>Grade <span class="required">*</span></label>
-        <select name="grade" required>
+      <div class="q" data-required style="margin-bottom:0;">
+        <label class="qlabel">Grade <span class="required">*</span></label>
+        <select name="grade">
           <option value="">Choose…</option>
           <option>6th</option>
           <option>7th</option>
           <option>8th</option>
         </select>
       </div>
-      <div class="q" style="margin-bottom:0;">
-        <label>Gender <span class="required">*</span></label>
-        <select name="gender" required>
+      <div class="q" data-required style="margin-bottom:0;">
+        <label class="qlabel">Gender <span class="required">*</span></label>
+        <select name="gender">
           <option value="">Choose…</option>
           <option>Male</option>
           <option>Female</option>
@@ -363,25 +368,30 @@ const btn = document.getElementById("submit-btn");
 const status = document.getElementById("status");
 const thanks = document.getElementById("thanks");
 
+// Clear the red highlight as soon as a question gets answered.
+form.addEventListener("change", (e) => {
+  const q = e.target.closest && e.target.closest('.q.missing');
+  if (q) q.classList.remove("missing");
+});
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   status.className = "";
 
-  // Validate every radio group flagged data-required.
+  // Validate every required question (radio groups + the demographic selects).
   const missing = [];
   document.querySelectorAll('.q[data-required]').forEach((q) => {
+    q.classList.remove("missing");
     const radios = q.querySelectorAll('input[type=radio]');
-    const name = radios.length ? radios[0].name : null;
-    if (name && !form.querySelector(`input[name="${name}"]:checked`)) missing.push(q);
+    const sel = q.querySelector('select');
+    let answered = true;
+    if (radios.length) answered = !!form.querySelector(`input[name="${radios[0].name}"]:checked`);
+    else if (sel) answered = !!sel.value;
+    if (!answered) { q.classList.add("missing"); missing.push(q); }
   });
-  if (!form.grade.value || !form.gender.value) {
-    status.className = "err";
-    status.textContent = "Please fill in your grade and gender.";
-    return;
-  }
   if (missing.length) {
     status.className = "err";
-    status.textContent = `Please answer all ${missing.length} highlighted question${missing.length>1?"s":""} above.`;
+    status.textContent = `Please answer the ${missing.length} question${missing.length>1?"s":""} highlighted in red, then tap Submit again.`;
     missing[0].scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
