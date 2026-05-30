@@ -71,6 +71,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .thanks.show{display:block;}
 .thanks h2{color:var(--navy);font-size:24px;margin-bottom:10px;border:none;padding:0;}
 .thanks p{color:var(--muted);font-size:15px;margin-bottom:8px;}
+.reveal{margin:22px 0 6px;padding:20px 18px;background:#fafbfc;border:1px solid var(--border);border-radius:12px;}
+.reveal-lead{font-size:16px;font-weight:800;color:var(--navy)!important;margin-bottom:14px;}
+.reveal-btn{display:block;width:100%;padding:16px;border-radius:10px;font-size:16px;font-weight:800;
+  text-decoration:none;margin-bottom:10px;-webkit-tap-highlight-color:transparent;}
+.reveal-btn:last-child{margin-bottom:0;}
+.reveal-btn.photos{background:var(--red);color:#fff;}
+.reveal-btn.trailer{background:var(--navy);color:#fff;}
+.reveal-btn:active{opacity:.85;}
 .footer{text-align:center;color:var(--muted);font-size:12px;padding:14px 0 24px;}
 .required{color:var(--err);font-weight:700;}
 .demo{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
@@ -399,7 +407,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 <div class="thanks card" id="thanks">
   <h2>Thank you! 🏀</h2>
   <p>Your answers are in. This is how we make the program even better.</p>
-  <p style="margin-top:12px;">— Coach Dorian &amp; the Science on the Court team</p>
+  <div class="reveal" id="reveal">
+    <p class="reveal-lead">🎉 As promised — here are the Demo Day photos:</p>
+    <a class="reveal-btn photos" id="reveal-photos" href="#" target="_blank" rel="noopener">📸 See the Demo Day photos</a>
+    <a class="reveal-btn trailer" id="reveal-trailer" href="#" target="_blank" rel="noopener" style="display:none;">🎬 Watch the Demo Day trailer</a>
+  </div>
+  <p style="margin-top:18px;">— Coach Dorian &amp; the Science on the Court team</p>
 </div>
 
 <p class="footer">Science on the Court &middot; <a href="https://www.scienceonthecourt.com" style="color:var(--muted);">scienceonthecourt.com</a></p>
@@ -412,6 +425,13 @@ const REPORT_EMAIL = "dbohler@scienceonthecourt.com";
 const FORM_VERSION = "v2";
 const PROGRAM = "John Muir";
 const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwa8cXx8mdIVZ-Ml_5pUL32Q6x2a1UWulzZMkxAWMtbfJiwTJipUxQVN-8GG28J9gEyMw/exec";
+
+// --- Demo Day reveal (unlocked only after a completed survey) ---
+// 1) Paste your Google Photos shared-album link below, then save & push.
+const PHOTO_ALBUM_URL = "https://photos.app.goo.gl/xktEw3V9bHegUD9k9";
+// 2) When the YouTube trailer is live: paste its link AND flip SHOW_TRAILER to true.
+const SHOW_TRAILER    = false;
+const TRAILER_URL     = "PASTE_YOUTUBE_TRAILER_LINK_HERE";
 const EMAILJS_CONFIG = { publicKey:"ipaVLQ_Dm6mxja_XA", serviceId:"service_q1l18a2", templateId:"template_439vcb9" };
 emailjs.init(EMAILJS_CONFIG.publicKey);
 
@@ -536,6 +556,14 @@ async function submit(){
     await Promise.all([emailPromise, sheetPromise]);
     form.style.display = "none";
     document.getElementById("progress").style.display = "none";
+    // Unlock the Demo Day reveal now that the survey is complete.
+    if (PHOTO_ALBUM_URL.startsWith("http")) {
+      document.getElementById("reveal-photos").href = PHOTO_ALBUM_URL;
+    }
+    if (SHOW_TRAILER && TRAILER_URL.startsWith("http")) {
+      const t = document.getElementById("reveal-trailer");
+      t.href = TRAILER_URL; t.style.display = "block";
+    }
     thanks.classList.add("show");
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (err) {
@@ -544,6 +572,18 @@ async function submit(){
     nextBtn.disabled = false; backBtn.disabled = false;
   }
 }
+
+// Pre-select Start/End from the link (e.g. ?phase=end) so the post-program
+// email can lock in the correct phase; the first screen still shows for confirmation.
+(function preselectPhase(){
+  const p = new URLSearchParams(window.location.search).get("phase");
+  if (!p) return;
+  const want = p.trim().toLowerCase() === "start" ? "Start"
+             : p.trim().toLowerCase() === "end"   ? "End" : "";
+  if (!want) return;
+  const r = form.querySelector(`input[name="phase"][value="${want}"]`);
+  if (r) r.checked = true;
+})();
 
 render();
 </script>
